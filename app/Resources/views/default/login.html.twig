@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h4> Недавние входы: </h4>
+    {% for log in recent_logs %}
+        <p>
+            <a href="#" class="recent_logs">{{ log.user.login }}</a> | {{ log.entryTime|date("H:i:s, d.m.Y") }}
+        </p>
+    {% endfor %}
+
+    <h4> Войти: </h4>
+
+    {{ form_start(login_form) }}
+    {{ form_widget(login_form) }}
+    <input type="submit" value="OK">
+    {{ form_end(login_form) }}
+
+    <div id='browser_log' style="color:gray">
+        Здесь будет появляться история входов в текущий браузер всех пользователей
+    </div>
+
+{% endblock body %}

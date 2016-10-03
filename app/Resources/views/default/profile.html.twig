@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border:1px solid;
+        }
+    </style>
+
+    <a href="{{ path('login_page') }}">Вход</a>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+
+        <h2>{{ flashMessage }}</h2>
+
+    {% endfor %}
+
+    <h3>История Ваших входов:</h3>
+    <table>
+        <th>Дата и время</th>
+        <th>Браузер</th>
+        <th>IP</th>
+    {% for log in logs %}
+        <tr>
+            <td>{{ log.entryTime|date("H:i:s, d.m.Y") }}</td>
+            <td>{{ log.browser }}</td>
+            <td>{{ log.ip }}</td>
+        </tr>
+    {% endfor %}
+    <table>
+
+{% endblock body %}
